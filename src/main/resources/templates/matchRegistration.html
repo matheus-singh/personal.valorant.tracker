@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Match</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="registration-page">
+<div th:replace="~{navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Match Registration</h1>
+    <form role="form" th:action="@{/match/register}" method="POST" th:object="${matchRegistrationRequest}">
+
+        <div class="form-group">
+            <label for="result" class="form-label">Result:</label>
+            <select id="result" name="result" th:field="*{result}" class="form-input" required>
+                <option th:each="res : ${MATCH_RESULTS}" th:value="${res}" th:text="${res}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="map" class="form-label">Map:</label>
+            <select id="map" name="map" th:field="*{map}" class="form-input" required>
+                <option th:each="res : ${mapsList}" th:value="${res}" th:text="${res}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="agent" class="form-label">Agent:</label>
+            <select id="agent" name="agent" th:field="*{agent}" class="form-input" required>
+                <option th:each="res : ${agentsList}" th:value="${res}" th:text="${res}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rank" class="form-label">Rank:</label>
+            <select id="rank" name="rank" th:field="*{rank}" class="form-input" required>
+                <option th:each="res : ${ranksList}" th:value="${res}" th:text="${res}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rankChange" class="form-label">Rank Change:</label>
+            <select id="rankChange" name="rankChange" th:field="*{rankChange}" class="form-input" required>
+                <option th:each="res : ${RANK_CHANGE}" th:value="${res}" th:text="${res}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rr" class="form-label">RR Gain:</label>
+            <input type="number" id="rr" name="rr" th:field="*{rr}" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+            <label for="kills" class="form-label">Kills:</label>
+            <input type="number" id="kills" name="kills" th:field="*{kills}" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+            <label for="deaths" class="form-label">Deaths:</label>
+            <input type="number" id="deaths" name="deaths" th:field="*{deaths}" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+            <label for="assists" class="form-label">Assists:</label>
+            <input type="number" id="assists" name="assists" th:field="*{assists}" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+            <label for="aces" class="form-label">Aces:</label>
+            <input type="number" id="aces" name="aces" th:field="*{aces}" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+            <label for="vodLink" class="form-label">VOD Link:</label>
+            <input type="url" id="vodLink" name="vodLink" th:field="*{vodLink}" class="form-input" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Save</button>
+    </form>
+
+    <a href="/home">
+        <button type="button" class="cancel-btn">Cancel</button>
+    </a>
+</div>
+</body>
+</html>

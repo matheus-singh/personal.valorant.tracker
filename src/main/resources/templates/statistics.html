@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Statistics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="~{navbar :: navbar}"></div>
+
+<div class="container mt-5">
+    <h1>Player Statistics</h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Total Matches</th>
+            <td th:text="${statistics.totalMatches}"></td>
+        </tr>
+        <tr>
+            <th>Wins</th>
+            <td th:text="${statistics.wins}"></td>
+        </tr>
+        <tr>
+            <th>Losses</th>
+            <td th:text="${statistics.losses}"></td>
+        </tr>
+        <tr>
+            <th>Win Rate</th>
+            <td th:text="${statistics.winRate + ' %'}"></td>
+        </tr>
+        <tr>
+            <th>Average Kills</th>
+            <td th:text="${statistics.avgKills}"></td>
+        </tr>
+        <tr>
+            <th>Average Deaths</th>
+            <td th:text="${statistics.avgDeaths}"></td>
+        </tr>
+        <tr>
+            <th>Average Assists</th>
+            <td th:text="${statistics.avgAssists}"></td>
+        </tr>
+        <tr>
+            <th>Current Rank</th>
+            <td th:text="${statistics.currentRank}"></td>
+        </tr>
+        <tr>
+            <th>Favorite Agent</th>
+            <td th:text="${statistics.favoriteAgent}"></td>
+        </tr>
+        <tr>
+            <th>Wins with Favorite Agent</th>
+            <td th:text="${statistics.winsWithFavoriteAgent}"></td>
+        </tr>
+        <tr>
+            <th>Losses with Favorite Agent</th>
+            <td th:text="${statistics.lossesWithFavoriteAgent}"></td>
+        </tr>
+        <tr>
+            <th>Win Rate with Favorite Agent</th>
+            <td th:text="${statistics.winRateWithFavoriteAgent}"></td>
+        </tr>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

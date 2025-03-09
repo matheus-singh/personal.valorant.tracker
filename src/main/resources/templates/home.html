@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Matches</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .vod-container {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{navbar :: navbar}"></div>
+
+<div class="container mt-5">
+    <h1>Valorant Matches</h1>
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>Result</th>
+            <th>Agent</th>
+            <th>Rank</th>
+            <th>Rank Change</th>
+            <th>RR Gain</th>
+            <th>Kills</th>
+            <th>Deaths</th>
+            <th>Assists</th>
+            <th>Aces</th>
+            <th>Date</th>
+            <th>Map</th>
+            <th>VOD</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="match, iterStat : ${matches}">
+            <tr>
+                <td th:text="${match.result}"></td>
+                <td th:text="${match.agent}"></td>
+                <td th:text="${match.rank}"></td>
+                <td th:text="${match.rankChange}"></td>
+                <td th:text="${match.rr}"></td>
+                <td th:text="${match.kills}"></td>
+                <td th:text="${match.deaths}"></td>
+                <td th:text="${match.assists}"></td>
+                <td th:text="${match.aces}"></td>
+                <td th:text="${match.date}"></td>
+                <td th:text="${match.map}"></td>
+                <td>
+                    <button class="btn btn-primary" th:onclick="'toggleVod(' + ${iterStat.index} + ')'">
+                        Watch VOD
+                    </button>
+                    <div class="vod-container" th:id="'vod-' + ${iterStat.index}">
+                        <iframe width="560" height="315" th:src="${match.vodLink}"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+                    </div>
+                </td>
+                <td>
+                    <form th:action="@{/match/delete/{id}(id=${match.id})}" method="POST">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+
+    </table>
+</div>
+
+<script>
+    function toggleVod(index) {
+        var vodContainer = document.getElementById("vod-" + index);
+        vodContainer.style.display = vodContainer.style.display === "none" ? "block" : "none";
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
